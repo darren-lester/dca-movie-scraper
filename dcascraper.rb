@@ -29,6 +29,7 @@ def parseMovie(movieListingNode)
 	dateNode = movieListingNode.css('.date')
 
 	title = titleNode[0].text
+	title.strip!
 	# strip out newline and age rating
 	title = title.sub(/\n\(.*\)/, '')
 

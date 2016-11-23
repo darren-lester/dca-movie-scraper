@@ -16,14 +16,10 @@ def scrape
 
 	# parse the movies
 	movieListings = []
-	movieListingNodes.each do |movieListingNode|
-		movieListings << parseMovie(movieListingNode)
-	end
-
+	movieListingNodes.each { |movieListingNode| movieListings << parseMovie(movieListingNode) }
+	
 	# output the movies
-	movieListings.each do |movieListing|
-		puts movieListing
-	end
+	movieListings.each { |movieListing| puts movieListing }
 end
 
 # Converts a movie listing node to a MovieListing object

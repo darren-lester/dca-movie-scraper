@@ -30,7 +30,7 @@ def parseMovie(movieListingNode)
 
 	title = titleNode[0].text
 	# strip out newline and age rating
-	title = title.gsub(/\n\(.*\)/, '')
+	title = title.sub(/\n\(.*\)/, '')
 
 	director = directorNode[0].text
 

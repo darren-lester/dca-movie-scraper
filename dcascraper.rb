@@ -31,6 +31,7 @@ def getMonday
 
 	return monday
 end
+
 # Converts a movie listing node to a MovieListing object
 def parseMovie(movieListingNode)
 	titleNode = movieListingNode.css('.info')

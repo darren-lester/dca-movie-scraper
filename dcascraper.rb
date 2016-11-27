@@ -2,12 +2,15 @@
 
 require 'nokogiri'
 require 'open-uri'
+require 'date'
 
 # Scrapes and outputs all movies.
 def scrape
-	# create url to retrieve all movies from current date onwards
-	allMoviesURL = "http://www.dca.org.uk/whats-on/films?from=#{Time.now.strftime("%Y-%m-%d")}&to=future"
+	monday = getMonday
 
+	# create url to retrieve all movies from current date onwards
+	allMoviesURL = "http://www.dca.org.uk/whats-on/films?from=#{monday.strftime("%Y-%m-%d")}&to=future"
+	puts allMoviesURL
 	# retrieve page
 	page = Nokogiri::HTML(open(allMoviesURL))
 
@@ -22,6 +25,12 @@ def scrape
 	movieListings.each { |movieListing| puts movieListing }
 end
 
+def getMonday
+	now = Date.today
+	monday = now - (now.wday - 1) % 7
+
+	return monday
+end
 # Converts a movie listing node to a MovieListing object
 def parseMovie(movieListingNode)
 	titleNode = movieListingNode.css('.info')

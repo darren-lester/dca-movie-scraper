@@ -10,7 +10,7 @@ def scrape
 
 	# create url to retrieve all movies from current date onwards
 	allMoviesURL = "http://www.dca.org.uk/whats-on/films?from=#{monday.strftime("%Y-%m-%d")}&to=future"
-	puts allMoviesURL
+	
 	# retrieve page
 	page = Nokogiri::HTML(open(allMoviesURL))
 

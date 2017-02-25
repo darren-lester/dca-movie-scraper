@@ -15,11 +15,10 @@ def scrape
 	page = Nokogiri::HTML(open(allMoviesURL))
 
 	# select the movies
-	movieListingNodes = page.css('.event')
+	movieListingNodes = getMovieListingNodes(page)
 
 	# parse the movies
-	movieListings = []
-	movieListingNodes.each { |movieListingNode| movieListings << parseMovie(movieListingNode) }
+	movieListings = parseMovieListings(movieListingNodes)
 	
 	# output the movies
 	movieListings.each { |movieListing| puts movieListing }
@@ -30,6 +29,16 @@ def getMonday
 	monday = now - (now.wday - 1) % 7
 
 	return monday
+end
+
+def getMovieListingNodes(page)
+	return page.css('.event')
+end
+
+def parseMovieListings(movieListingNodes)
+	movieListings = []
+	movieListingNodes.each { |movieListingNode| movieListings << parseMovie(movieListingNode) }
+	return movieListings
 end
 
 # Converts a movie listing node to a MovieListing object

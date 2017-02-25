@@ -9,7 +9,7 @@ def scrape
 	monday = getMonday
 
 	# create url to retrieve all movies from current date onwards
-	allMoviesURL = "http://www.dca.org.uk/whats-on/films?from=#{monday.strftime("%Y-%m-%d")}&to=future"
+	allMoviesURL = getMoviesURL(monday)
 	
 	# retrieve page
 	page = Nokogiri::HTML(open(allMoviesURL))
@@ -28,6 +28,10 @@ def getMonday
 	monday = now - (now.wday - 1) % 7
 
 	return monday
+end
+
+def getMoviesURL(monday)
+	return "http://www.dca.org.uk/whats-on/films?from=#{monday.strftime("%Y-%m-%d")}&to=future"
 end
 
 def getMovieListingNodes(page)

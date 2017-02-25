@@ -34,20 +34,31 @@ end
 
 # Converts a movie listing node to a MovieListing object
 def parseMovie(movieListingNode)
-	titleNode = movieListingNode.css('.info')
-	directorNode = movieListingNode.css('.subheading')
-	dateNode = movieListingNode.css('.date')
+	title = parseTitle(movieListingNode)
+	director = parseDirector(movieListingNode)
+	date = parseDate(movieListingNode)
+	return MovieListing.new(title, director, date)
+end
 
+def parseTitle(movieListingNode)
+	titleNode = movieListingNode.css('.info')
 	title = titleNode[0].text
 	title.strip!
 	# strip out newline and age rating
 	title = title.sub(/\n\(.*\)/, '')
+	return title
+end
 
+def parseDirector(movieListingNode)
+	directorNode = movieListingNode.css('.subheading')
 	director = directorNode[0].text
+	return director
+end
 
+def parseDate(movieListingNode)
+	dateNode = movieListingNode.css('.date')
 	date = dateNode[0].text
-
-	return MovieListing.new(title, director, date)
+	return date
 end
 
 class MovieListing

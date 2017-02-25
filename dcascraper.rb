@@ -20,8 +20,7 @@ def scrape
 	# parse the movies
 	movieListings = parseMovieListings(movieListingNodes)
 	
-	# output the movies
-	movieListings.each { |movieListing| puts movieListing }
+	return movieListings
 end
 
 def getMonday
@@ -82,4 +81,7 @@ class MovieListing
 	end
 end
 
-scrape
+movieListings = scrape
+
+# output the movies
+movieListings.each { |movieListing| puts movieListing }
